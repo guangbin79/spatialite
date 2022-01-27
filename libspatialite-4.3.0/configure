@@ -17302,7 +17302,7 @@ _ACEOF
   LIBS="-lsqlite3 $LIBS"
 
 else
-  as_fn_error $? "'libsqlite3' is required but it doesn't seem to be installed on this system." "$LINENO" 5
+  LIBS="-lsqlite3 $LIBS"
 fi
 
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking for inflateInit_ in -lz" >&5
@@ -17524,7 +17524,7 @@ if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
 else
-  as_fn_error $? "'libproj' is required but it doesn't seem to be installed on this system." "$LINENO" 5
+  LIBS="-lproj $LIBS"
 fi
 
   { $as_echo "$as_me:${as_lineno-$LINENO}: checking for library containing pj_init_ctx" >&5
@@ -17582,7 +17582,7 @@ if test "$ac_res" != no; then :
   test "$ac_res" = "none required" || LIBS="$ac_res $LIBS"
 
 else
-  as_fn_error $? "'libproj' is required but the version on this system does not support the required features (Version 4.8.0 or later is needed)." "$LINENO" 5
+  LIBS="-lproj $LIBS"
 fi
 
 else

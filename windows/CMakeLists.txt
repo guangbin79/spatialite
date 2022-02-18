@@ -9,4 +9,4 @@ link_directories("${CMAKE_FIND_ROOT_PATH_MODE_LIBRARY}/")
 
 add_library(3rd SHARED 3rd.cpp)
 
-target_link_libraries(3rd libspatialite.a librttopo.a libgeos_c.a libgeos.a libproj.a libsqlite3.a libcharset.a libiconv.a libminizip.a libz.a)
+target_link_libraries(3rd libspatialite.a librttopo.a libgeos_c.a libgeos.a libproj.a libsqlite3-pcre.a libpcre.a libsqlite3.a libcharset.a libiconv.a libminizip.a libz.a)

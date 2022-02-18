@@ -31,6 +31,18 @@ CFLAGS="$CFLAGS -DSQLITE_CORE" ./configure --host=$TARGET --with-sysroot=$SYSROO
 make
 make install
 
+echo "xxxbuild pcre"
+cd ../pcre-8.45
+./configure --host=$TARGET --with-sysroot=$SYSROOT --prefix=$PREFIX --enable-static=yes --enable-shared=no
+make
+make install
+
+echo "xxxbuild sqlite3-pcre"
+cd ../sqlite3-pcre
+CFLAGS="$CFLAGS -I$SYSROOT/include" make
+mv libsqlite3-pcre.a $SYSROOT/lib
+cp sqlite3-pcre.h $SYSROOT/include
+
 echo "xxxbuild proj"
 cd ../proj-6.3.2
 autoreconf -f -i

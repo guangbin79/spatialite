@@ -1,18 +1,7 @@
 #!/bin/bash
 
-TARGET=armv7a-linux-androideabi
-ARCH=arm-linux-eabi
-API=19
-TOOLCHAIN=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64
-PREFIX=$PWD/build/armeabi-v7a
+PREFIX=$PWD/build/x86_64
 
-export AR=$TOOLCHAIN/bin/llvm-ar
-export CC=$TOOLCHAIN/bin/$TARGET$API-clang
-export AS=$CC
-export CXX=$TOOLCHAIN/bin/$TARGET$API-clang++
-export LD=$TOOLCHAIN/bin/ld
-export RANLIB=$TOOLCHAIN/bin/llvm-ranlib
-export STRIP=$TOOLCHAIN/bin/llvm-strip
 export CFLAGS="-fPIC -O2 -I$PREFIX/include"
 export CPPFLAGS="-fPIC -O2 -I$PREFIX/include"
 export LDFLAGS="-L$PREFIX/lib"
@@ -63,14 +52,14 @@ make install
 
 echo "xxxbuild geos"
 cd ../geos-3.9.2
-./configure --host=$TARGET --prefix=$PREFIX --enable-static=yes --enable-shared=no --disable-inline
+./configure --host=$TARGET --prefix=$PREFIX --enable-static=yes --enable-shared=no
 make -j6
 make install
 
 echo "xxxbuild rttopo"
 cd ../librttopo-librttopo-1.1.0/librttopo
 ./autogen.sh
-./configure --host=$ARCH --prefix=$PREFIX --enable-static=yes --enable-shared=no --with-geosconfig=$PREFIX/bin/geos-config
+./configure --host=$TARGET --prefix=$PREFIX --enable-static=yes --enable-shared=no --with-geosconfig=$PREFIX/bin/geos-config
 make
 make install
 cd ..
@@ -78,6 +67,6 @@ cd ..
 echo "xxxbuild spatialite"
 cd ../libspatialite-5.0.1
 autoreconf -f -i
-CFLAGS+=" -ULOADABLE_EXTENSION -DPROJ_NEW" ./configure --host=$ARCH --prefix=$PREFIX --enable-static=yes --enable-shared=no --enable-freexl=no --enable-libxml2=no --enable-examples=no --with-geosconfig=$PREFIX/bin/geos-config
+CFLAGS+=" -ULOADABLE_EXTENSION -DPROJ_NEW" ./configure --host=$TARGET --prefix=$PREFIX --enable-static=yes --enable-shared=no --enable-freexl=no --enable-libxml2=no --enable-examples=no --with-geosconfig=$PREFIX/bin/geos-config
 make -j6
 make install
